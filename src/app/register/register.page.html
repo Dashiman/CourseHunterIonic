@@ -1,9 +1,81 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>register</ion-title>
+    <ion-title>Rejestracja</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+<ion-grid>
+  <form id="registerForm" [formGroup]="regisFG" #registerForm="ngForm">
 
+  <ion-row>
+    <ion-col size="12">
+      <ion-item>
+        <ion-label>Nazwa użytkownika</ion-label>
+        <ion-input type="text" formControlName="username" #username id="username" name="username" class="form-control" ></ion-input>
+
+      </ion-item>
+      <div *ngIf="username.errors?.required">
+        Nazwa użytkownika jest wymagana.
+      </div>
+      <div *ngIf="username.errors?.minlength">
+        Nazwa użytkownika musi mieć co najmniej 3 znaki długości.
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="12">
+      <ion-item>
+        <ion-label>Hasło</ion-label>
+        <ion-input type="password" formControlName="password" class="form-control" #password id="password" name="password" ></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12">
+      <ion-item>
+        <ion-label>Email</ion-label>
+        <ion-input  type="text" formControlName="email" class="form-control" #email id="email" name="email"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12">
+      <ion-item>
+        <ion-label>Imię</ion-label>
+        <ion-input type="text" formControlName="name" class="form-control" #name id="name" name="name" ></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12">
+      <ion-item>
+        <ion-label>Nazwisko</ion-label>
+        <ion-input type="text" formControlName="lastname" class="form-control" #lastname id="lastname" name="lastname" ></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12">
+      <ion-item>
+        <ion-label>Numer telefonu</ion-label>
+        <ion-input type="text" formControlName="phoneNumber" class="form-control" #phone id="phone" name="phone" ></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12">
+  <ion-button expand="block"(click)="addUser(registerForm.form)">Rejestruj</ion-button>
+
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12">
+  <ion-button expand="block" onclick="registerForm.reset()">Reset</ion-button>
+
+    </ion-col>
+  </ion-row>
+  </form>
+</ion-grid>
 </ion-content>

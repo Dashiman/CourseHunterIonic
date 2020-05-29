@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'offer-list',
     pathMatch: 'full'
   },
   {
@@ -31,7 +31,7 @@ const routes: Routes = [
     loadChildren: () => import('./offer-list/offer-list.module').then( m => m.OfferListPageModule)
   },
   {
-    path: 'login',
+    path: 'signIn',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
   {
