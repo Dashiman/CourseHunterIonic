@@ -10,6 +10,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Camera } from '@ionic-native/camera/ngx';
 import {IonicStorageModule} from '@ionic/storage';
+import { Vibration } from '@ionic-native/vibration/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +24,7 @@ import {IonicStorageModule} from '@ionic/storage';
   providers: [
     StatusBar,
     Camera,
+    Vibration,
     Storage,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

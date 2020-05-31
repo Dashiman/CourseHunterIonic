@@ -47,7 +47,7 @@ export class AppComponent {
               }
       });
     
-      this.statusBar.styleDefault();
+      this.statusBar.styleBlackOpaque();
       this.splashScreen.hide();
 
     });
@@ -55,5 +55,23 @@ export class AppComponent {
   logout(){ 
     this.storage.clear();
     this.router.navigate(['/login'])
+  }
+  reload(){ 
+    this.storage.get('username').then(res => {
+      if(res!=null){
+      if (res.length>0) {
+        this.username=res;
+        this.isLoggedIn=true;
+      }
+      this.storage.get('userid').then(resid => {
+this.userId=resid;
+      })
+      this.storage.get('authority').then(resa => {
+        this.authority=resa;
+        console.log(this.username + "se")
+
+              })
+            }
+    });
   }
 }

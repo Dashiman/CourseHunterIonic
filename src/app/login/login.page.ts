@@ -4,6 +4,7 @@ import { AuthService } from 'src/services/auth.service';
 import { Router } from '@angular/router';
 import {Storage} from '@ionic/storage'
 import { StorageService } from '../storage.service';
+import { Vibration } from '@ionic-native/vibration/ngx';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -13,7 +14,7 @@ export class LoginPage implements OnInit {
 
 
   user: Users;
-  constructor(private _authService: AuthService, private _router: Router,private storageService:StorageService,public storage: Storage) {
+  constructor(private _authService: AuthService, private _router: Router,private storageService:StorageService,public storage: Storage,private vibration: Vibration) {
     this.user = new Users();
 
   }
@@ -42,8 +43,11 @@ export class LoginPage implements OnInit {
 
           this._router.navigate(['/offer-list'])
      }
-     else
-     alert("błąd logowania")
+     else{
+       
+     this.vibration.vibrate(5000);
+      this.vibration.vibrate([2000,1000,2000]);
+     }
 
       }
     );
