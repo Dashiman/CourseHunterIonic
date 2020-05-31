@@ -1,3 +1,19 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu contentId="mainContent" side="start">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item  *ngIf="isLoggedIn">Dodaj nowy kurs</ion-item>
+        <ion-item routerLink='/offer-list'>Lista kursów</ion-item>
+        <ion-item *ngIf="isLoggedIn">Profil</ion-item>
+        <ion-item *ngIf="isLoggedIn" (click)="logout()">Wyloguj</ion-item>
+        <ion-item routerLink='/login' *ngIf="!isLoggedIn">Zaloguj</ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="mainContent"></ion-router-outlet>
 </ion-app>

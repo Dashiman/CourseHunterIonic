@@ -1,9 +1,37 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>login</ion-title>
+    <ion-title>Logowanie</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content  >
+  <form  id="loginForm" #loginForm="ngForm" action="" method="post">
+    <ion-grid>
+      <ion-row color="primary" justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div padding>
+            <ion-item>
+              <ion-input placeholder="Login" type="text" [(ngModel)]="user.username" #username id="username" name="username" class="form-control"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input placeholder="Hasło" type="password" [(ngModel)]="user.password" class="form-control" #password id="password" name="password"></ion-input>
+            </ion-item>
+          </div>
+          <div padding>
+            <ion-button (click)="login(loginForm.form)" size="large" type="submit" [disabled]="loginForm.invalid" expand="block">Zaloguj</ion-button>
 
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <div text-center>
+     Jeśli nie posiadasz konta, <a routerLink='/register'>
+        zarejestruj się!</a> 
+        </div>
+    </ion-row>
+    </ion-grid>
+  </form>
 </ion-content>
