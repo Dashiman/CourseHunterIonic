@@ -22,11 +22,6 @@ const routes: Routes = [
     canActivate:[AuthGuardService]
   },
   {
-    path: 'add-course',
-    loadChildren: () => import('./add-course/add-course.module').then( m => m.AddCoursePageModule),
-    canActivate:[AuthGuardService]
-  },
-  {
     path: 'offer-list',
     loadChildren: () => import('./offer-list/offer-list.module').then( m => m.OfferListPageModule)
   },
@@ -46,6 +41,11 @@ const routes: Routes = [
   {
     path: 'about',
     loadChildren: () => import('./about/about.module').then( m => m.AboutPageModule)
+  },
+  {
+    path: 'offer-form',
+    loadChildren: () => import('./add-course/add-course.module').then( m => m.AddCoursePageModule),
+    canActivate:[AuthGuardService]
   },
 ];
 
