@@ -12,6 +12,7 @@
         <ion-item *ngIf="isLoggedIn">Profil</ion-item>
         <ion-item *ngIf="isLoggedIn" (click)="logout()">Wyloguj</ion-item>
         <ion-item routerLink='/login' *ngIf="!isLoggedIn">Zaloguj</ion-item>
+        <ion-item routerLink='/about'>Twórcy</ion-item>
       </ion-list>
     </ion-content>
   </ion-menu>

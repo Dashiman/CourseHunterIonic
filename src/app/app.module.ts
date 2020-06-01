@@ -11,7 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { Camera } from '@ionic-native/camera/ngx';
 import {IonicStorageModule} from '@ionic/storage';
 import { Vibration } from '@ionic-native/vibration/ngx';
-
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -26,6 +27,8 @@ import { Vibration } from '@ionic-native/vibration/ngx';
     Camera,
     Vibration,
     Storage,
+    YoutubeVideoPlayer,
+    AndroidPermissions,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
