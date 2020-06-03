@@ -13,6 +13,7 @@ export class RegistrationService {
     constructor(private http: HttpClient, pl: PlatformLocation) {
        // this.baseUrl = window.location.origin;
        this.baseUrl = "https://jobhunterug.azurewebsites.net";
+       
 
     }
 
@@ -24,5 +25,12 @@ export class RegistrationService {
                 return res;
             }
         )
+    }
+    updateProfile(user:Users){
+        return this.http.put<Users>(this.baseUrl+"/api/registration/UpdateUser", user).pipe(
+            (res) => {
+                return res;
+            }
+        ) 
     }
 }

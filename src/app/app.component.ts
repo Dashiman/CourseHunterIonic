@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
-import { Platform } from '@ionic/angular';
+import { Platform, AlertController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +24,7 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,public storage:Storage,
-    private router:Router, private androidPermissions: AndroidPermissions
+    private router:Router, private androidPermissions: AndroidPermissions,public alertCtrl: AlertController,private lcn:LocalNotifications
   ) {
     this.initializeApp();
   }
@@ -46,7 +47,14 @@ export class AppComponent {
                 })
               }
       });
-
+this.lcn.schedule({
+  id:1,
+  title:"Witaj",
+  text:"Witaj w CourseHunter by DS and JS",
+  sound:this.setSound(),
+  data:{heh:"Tajne dane"}
+})
+this.lcn.on
       this.statusBar.styleBlackOpaque();
       this.splashScreen.hide();
 
@@ -74,4 +82,9 @@ this.userId=resid;
             }
     });
   }
+  setSound(){
+    if (this.platform.is('android')) {
+         return 'file://assets/swiftly.mp3'
+       
+     }}
 }

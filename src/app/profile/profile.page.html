@@ -8,5 +8,227 @@
 </ion-header>
 
 <ion-content>
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <form id="registerForm" [formGroup]="regisFG" #registerForm="ngForm">
 
+     
+      
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label>Email</ion-label>
+              <ion-input  type="text" formControlName="email" class="form-control" #email id="email" name="email"></ion-input>
+            </ion-item>
+            <ion-label style="margin-top:10px;" *ngIf="regisFG.controls['email'].errors?.email&&regisFG.controls['email'].touched">
+              Adres e-mail musi spełniać wymagania dotyczące prawidłowej notacji: użytkownik@domena
+            </ion-label>
+            <ion-label style="margin-top:10px;" *ngIf="regisFG.controls['email'].errors?.required&&regisFG.controls['email'].touched">
+              Adres e-mail jest wymagany.
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label>Imię</ion-label>
+              <ion-input type="text" formControlName="name" class="form-control" #name id="name" name="name" ></ion-input>
+            </ion-item>
+            <ion-label style="margin-top:10px;" *ngIf="regisFG.controls['name'].errors?.required&&regisFG.controls['name'].touched">
+              Pole 'Imię' jest wymagane.
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label>Nazwisko</ion-label>
+              <ion-input type="text" formControlName="lastname" class="form-control" #lastname id="lastname" name="lastname" ></ion-input>
+            </ion-item>
+            <ion-label style="margin-top:10px;" *ngIf="regisFG.controls['lastname'].errors?.required&&regisFG.controls['lastname'].touched">
+              Pole 'Nazwisko' jest wymagane.
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label>Numer telefonu</ion-label>
+              <ion-input type="text" formControlName="phoneNumber" class="form-control" #phone id="phone" name="phone" ></ion-input>
+            </ion-item>
+            <ion-label style="margin-top:10px;" *ngIf="regisFG.controls['phoneNumber'].errors?.required&&regisFG.controls['phoneNumber'].touched">
+              Pole 'Telefon' jest wymagane.
+            </ion-label>
+            <ion-label style="margin-top:10px;" *ngIf="regisFG.controls['phoneNumber'].errors?.minlength&&regisFG.controls['phoneNumber'].touched">
+              Numer telefonu musi mieć dokładnie 9 cyfr.
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+        <ion-button expand="block"(click)="editUser(registerForm.form)">Zapisz</ion-button>
+      
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+        <ion-button expand="block" onclick="registerForm.reset()">Reset</ion-button>
+      
+          </ion-col>
+        </ion-row>
+        </form>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+
+<ion-grid>
+
+  <ion-row><ion-col>
+    <h4>Twoje zlecenia</h4>
+  </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col>
+    <ion-list *ngFor="let o of profileData.addedByUser">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <h4>{{o.title}}</h4>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+{{o.description}}
+          </ion-col>
+          <ion-col>
+            <b>Oferowana kwota:</b><br>
+            {{o.declaredCost|number:'1.2-2'}} PLN
+          </ion-col>
+          <ion-col>
+            <b>Koniec oferty:</b><br>
+            {{o.endOfferDate | date : "dd.MM.yyyy" }}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <b>Kategoria:</b>
+            {{o.category?.description}}
+          </ion-col>
+          <ion-col size="6">
+<ion-button (click)="showDetails(o.id)">
+  Szczegóły
+</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+  </ion-col>
+
+</ion-row>
+</ion-grid>
+
+
+
+<ion-grid>
+
+  <ion-row><ion-col>
+    <h4>Przyjęte przez Ciebie zlecenia</h4>
+  </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col>
+    <ion-list *ngFor="let o of profileData.takenbyUser">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <h4>{{o.title}}</h4>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+{{o.description}}
+          </ion-col>
+          <ion-col>
+            <b>Oferowana kwota:</b><br>
+            {{o.declaredCost|number:'1.2-2'}} PLN
+          </ion-col>
+          <ion-col>
+            <b>Koniec oferty:</b><br>
+            {{o.endOfferDate | date : "dd.MM.yyyy" }}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <b>Kategoria:</b>
+            {{o.category?.description}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+  </ion-col>
+
+</ion-row>
+</ion-grid>
+<ion-grid>
+
+  <ion-row><ion-col>
+    <h4>Twoje wykonywane dodane zlecenia</h4>
+  </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col>
+    <ion-list *ngFor="let o of profileData.addandTaken">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <h4>{{o.title}}</h4>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+{{o.description}}
+          </ion-col>
+          <ion-col>
+            <b>Oferowana kwota:</b><br>
+            {{o.declaredCost|number:'1.2-2'}} PLN
+          </ion-col>
+          <ion-col>
+            <b>Koniec oferty:</b><br>
+            {{o.endOfferDate | date : "dd.MM.yyyy" }}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col >
+            <b>Kategoria:</b>
+            {{o.category?.description}}
+          </ion-col>
+          <ion-col>
+            <form [formGroup]="endFg">
+
+              <ion-select formControlName="endSelect" class="form-control" id="status">
+
+                <ion-select-option value="3">Rekomendacja</ion-select-option>
+                <ion-select-option value="4">Neutralne</ion-select-option>
+                <ion-select-option value="5">Reklamacja</ion-select-option>
+              </ion-select>
+              <ion-label style="margin-top:10px;" *ngIf="endFg.controls['endSelect'].errors?.required&&endFg.controls['endSelect'].touched">
+                Pole jest wymagane.
+              </ion-label>
+            </form>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+<ion-button expand="block" (click)="endCourse(o.id)" >Zakończ kurs</ion-button>
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+    </ion-list>
+  </ion-col>
+
+</ion-row>
+</ion-grid>
 </ion-content>
