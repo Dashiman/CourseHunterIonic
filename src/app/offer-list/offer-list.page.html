@@ -7,10 +7,12 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-
-  <ion-card  (click)="expandItem(o)" *ngFor="let o of offer ">
+<ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+<ion-refresher-content pullingIcon="arrow-dropdown" refreshingSpinner="circles" refreshingText="Ładowanie..."></ion-refresher-content>
+</ion-refresher>
+  <ion-card   *ngFor="let o of offer ">
     <ion-card-header>
-      <ion-card-title> 
+      <ion-card-title (click)="expandItem(o)"> 
                  {{o.title}}
       </ion-card-title>
     </ion-card-header>

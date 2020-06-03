@@ -82,8 +82,26 @@ console.log(this.userId)
   showDetails(offerId: number) {
     this.route.navigate(['offer/' + offerId])
   }
+  refresh(event) {
+    this.job.get().subscribe(res => {
+      this.offer = res;
+      this.offer.forEach(x => {
+        x.bidding = false;
+        x.editing = false;
+      })
+      this.loading = false;
+    })
+
+   setTimeout(()=>{
+event.target.complete();
+   },2000)
+    
+
+
+  }
   expandItem(item): void {
-    console.log(item)
+
+    
     if (item.expanded) {
       item.expanded = false;
     } else {

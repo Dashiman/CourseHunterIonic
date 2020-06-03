@@ -4,4 +4,5 @@ export class ProfileData {
   public takenByUser: TakenOffer[];
   public addedByUser: JobOffer[];
   public addandTaken: TakenOffer[]
+  public editingProfile:boolean;
 }

@@ -9,7 +9,7 @@
       <ion-list>
         <ion-item routerLink='/offer-form' *ngIf="isLoggedIn">Dodaj nowy kurs</ion-item>
         <ion-item routerLink='/offer-list'>Lista kursów</ion-item>
-        <ion-item *ngIf="isLoggedIn">Profil</ion-item>
+        <ion-item routerLink='/profile' *ngIf="isLoggedIn">Profil</ion-item>
         <ion-item *ngIf="isLoggedIn" (click)="logout()">Wyloguj</ion-item>
         <ion-item routerLink='/login' *ngIf="!isLoggedIn">Zaloguj</ion-item>
         <ion-item routerLink='/about'>Twórcy</ion-item>

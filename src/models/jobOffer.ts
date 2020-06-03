@@ -18,7 +18,7 @@ public expanded:boolean;
 public bidOffers:BidOffer[];
   public endedAs: number;
   public edited: boolean;
-
+public editing:boolean;
   public bidding:boolean
 }
 export  class TakenOffer {

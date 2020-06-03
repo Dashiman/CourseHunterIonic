@@ -17,10 +17,14 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Backlight } from '@ionic-native/backlight/ngx';
 import { DatePicker } from '@ionic-native/date-picker/ngx';
 import { AuthGuardService } from './auth';
+import { Flashlight } from '@ionic-native/flashlight/ngx';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ReactiveFormsModule,
+  imports: [BrowserModule, IonicModule.forRoot({
+    animated:true
+  }), AppRoutingModule, ReactiveFormsModule,
     HttpClientModule,
     
 
@@ -30,10 +34,12 @@ import { AuthGuardService } from './auth';
     StatusBar,
     Camera,
     Vibration,
+    LocalNotifications, 
     Storage,AuthGuardService,
     YoutubeVideoPlayer,
     DatePicker,
     InAppBrowser,
+    Flashlight,
     Backlight,
     AndroidPermissions,
     SplashScreen,

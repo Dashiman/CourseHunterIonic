@@ -4,8 +4,11 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { AuthService } from 'src/services/auth.service';
 import { Router } from '@angular/router';
 import { JobOfferService } from 'src/services/job-offer.service';
-import { ToastController } from '@ionic/angular';
+import { ToastController, Platform } from '@ionic/angular';
 import { DatePicker } from '@ionic-native/date-picker/ngx';
+import { Storage } from '@ionic/storage';
+import { DatePipe } from '@angular/common';
+
 @Component({
   selector: 'app-add-course',
   templateUrl: './add-course.page.html',
@@ -13,10 +16,10 @@ import { DatePicker } from '@ionic-native/date-picker/ngx';
 })
 export class AddCoursePage implements OnInit {
 
- 
+ selectedDate:string="";
   offer: JobOffer = new JobOffer();
   offerFG: FormGroup;
-
+userId:number;
 
   get title() { return this.offerFG.get('title') }
   get category() { return this.offerFG.get('category') }
@@ -25,8 +28,10 @@ export class AddCoursePage implements OnInit {
   get endOffer() { return this.offerFG.get('endOffer') }
 
   constructor(private fb: FormBuilder, private _router: Router, private _job: JobOfferService, 
-    public toastController: ToastController, public storage: Storage,private datePicker: DatePicker) {
- 
+    public toastController: ToastController, public storage: Storage,private datePicker: DatePicker,public datePipe: DatePipe,public platform:Platform) {
+ this.platform.ready().then(()=>{
+   this.selectedDate=this.datePipe.transform(new Date(),"dd-MM-yyyy");
+ })
   }
   ngOnInit() {
   
@@ -41,15 +46,34 @@ export class AddCoursePage implements OnInit {
  
     this.storage.get('username').then(res => {
       if(res!=null){
-      if (res.length>0) {
+        
+      if (res.length<1) {
         this._router.navigate(['/login']);
       }
     }
     });
-    
+    this.storage.get('userid').then(res => {
+      if(res!=null){
+        
+      if (res.length!=0) {
+        this.userId=res;
+      }
+    }
+    });
   }
+selectDate(){ 
+var opts={
+  date:new Date(),
+  mode:"date",
+  androidTheme:this.datePicker.ANDROID_THEMES.THEME_DEVICE_DEFAULT_DARK
+}
+this.datePicker.show(opts).then((date)=>{
+  this.selectedDate=this.datePipe.transform(date,"dd-MM-yyyy");
+  this.offerFG.controls.endOffer.setValue(this.selectedDate)
+})
 
-  addOffer() {
+}
+  edit() {
     this.offerFG.markAllAsTouched();
     if (this.offerFG.valid) {
 
@@ -59,7 +83,9 @@ export class AddCoursePage implements OnInit {
       offer.description = this.offerFG.controls.description.value;
       offer.categoryId = this.offerFG.controls.category.value;
       offer.declaredCost = this.offerFG.controls.declaredCost.value;
-      offer.endOfferDate = this.offerFG.controls.endOffer.value;
+      //offer.endOfferDate = new Date(this.datePipe.transform(this.offerFG.controls.endOffer.value,"dd-MM-yyyy"));
+      offer.endOfferDate=this.offerFG.controls.endOffer.value;
+      offer.addedById=this.userId;
 
       if (this.offer.edited == true) {
         offer.id = this.offer.id;
@@ -87,10 +113,10 @@ export class AddCoursePage implements OnInit {
           if (res == 1)
             this._router.navigate(['']);
           else
-          this.presentToast("Błąd dodawania kursu ")
+          this.presentToast("Błąd dodawanfia kursu")
 
         },err=>{
-          this.presentToast("Błąd dodawania kursu ")
+          this.presentToast("Błąd dodawania kursu")
 
         })
       }

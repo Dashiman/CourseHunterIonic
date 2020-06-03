@@ -12,7 +12,7 @@ export class RegistrationService {
     baseUrl: string;
     constructor(private http: HttpClient, pl: PlatformLocation) {
        // this.baseUrl = window.location.origin;
-       this.baseUrl = "https://localhost:44393";
+       this.baseUrl = "https://jobhunterug.azurewebsites.net";
 
     }
 
